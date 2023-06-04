@@ -1,2 +1,2 @@
-# mydotfilei3
-i3wm and other dotfile
+
+for brightness sys/class/backlight/yourgpu/brightness
