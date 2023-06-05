@@ -14,6 +14,7 @@ stow --verbose=3 ./ -t ~/
 cd ..
 echo $?
 #test
-
+#test1
+lol
 
 
