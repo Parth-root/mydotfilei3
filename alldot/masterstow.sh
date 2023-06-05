@@ -12,6 +12,6 @@ cd ..
 cd rofi
 stow --verbose=3 ./ -t ~/
 cd ..
-
+echo $?
 
 
