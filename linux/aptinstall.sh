@@ -10,7 +10,7 @@ sudo apt install curl -y
 echo -e '\n'
 echo 'instaling starship'
 
-sudo curl -sS https://starship.rs/install.sh | sh
+sudo curl -sS https://starship.rs/install.sh | sh -y
 echo -e '\n'
 echo 'instaling starship to terminal'
 echo -e '\n'
