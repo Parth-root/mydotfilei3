@@ -4,13 +4,22 @@
 #upgrade is going to be taking lonf as par your pc update status
 
 cd $HOME
+yas=y
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install curl -y
 echo -e '\n'
 echo 'instaling starship'
+sudo apt install expect -y
+expect -c '
+spawn curl -sS https://starship.rs/install.sh | sh
+expect {
+"^?" {send "'"$yas"'\r"
+exp_continue
+}
+}'
 
-sudo curl -sS https://starship.rs/install.sh | sh -y
+sudo curl -sS https://starship.rs/install.sh | sh
 echo -e '\n'
 echo 'instaling starship to terminal'
 echo -e '\n'
