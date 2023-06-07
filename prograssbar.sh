@@ -9,11 +9,13 @@ function pbar {
 	_done=$(printf "%${_done}s")
 	_left=$(printf "%${_left}s")
 tput sc #save the current cursor position
-tput cup $((`tput lines`-1)) 
-#printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
-printf "\rProgress : [${_done// /|}${_left// /_}] ${_progress}%%"
+#tput cup $((`tput lines`-1))
+tput cup 1 
+printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
+#printf "\rProgress : [${_done// /|}${_left// /_}] ${_progress}%%"
 tput rc
-tput cup $((`tput lines`-4))
+#tput cup $((`tput lines`-4))
+#echo -e "\n"
 
 }
 #tput cup $((`tput lines`-4)) 
@@ -26,6 +28,8 @@ echo 1
 echo 1
 echo ""
 pbar 1
+echo first
+echo 1
 sleep 1
 echo start
 echo "is new file"
