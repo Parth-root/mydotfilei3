@@ -1,13 +1,10 @@
 #!/bin/bash
-echo -e "\n"
-cd ~
-cd .config
-cd $1
+cd
+rm $1
 if [ $? == 0 ]
 then
-	rm -Rfv *
+	echo "Deleted..."
 else
 	
 	echo "Not deleted anything"
 fi
-echo -e "\n"

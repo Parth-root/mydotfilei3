@@ -39,5 +39,9 @@ cd ..
 cd rofi
 stow --verbose=3 ./ -t ~/
 cd ..
+# deleting file
+./filedeletforestow.sh .Xresources
+cd home
+stow --verbose=3 ./ -t ~/
+cd ..
 
-echo $?
