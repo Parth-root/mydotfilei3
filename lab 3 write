@@ -1,49 +1,4 @@
 #!/bin/bash
-: '
-   ___  ___  _  __      ___  ____ ___  ________ ___ ______  ____ ___  ___  ____
-  / _ \/ _ \/ |/ /___  |_  ||_  // _ \|_  / / // _ <  /_  |/ __// _ \/ _ \/_  /
- / ___/ , _/    /___/ / __/_/_ </ // //_ <_  _/ // / / __//__ \/ // / // / / / 
-/_/  /_/|_/_/|_/     /____/____/\___/____//_/ \___/_/____/____/\___/\___/ /_/
-
-'
-<< 'metadata'
-Author: Anup Painuly
-Date Created: 04-06-2023 
-Date Modified: 04-06-2023 19:47:25
-Description: workflow for lab3
-metadata
-
-#reset the cursor
-function shutdown() {
-    tput cnorm 
-}
-
-trap shutdown EXIT
-
-#cursor position
-function cursorBack() {
-    echo -en "\033[$1D"
-}
-
-# splash prompt  when the commands are running
-# The splash_screen function takes the PID of previously running process in bg and shows the spinner prompt until the process completes executing
-function splash_screen() {
-    local pid=$1 # Process ID of the previous running command
-    local spin='-\|/'
-    local charwidth=1
-    local i=0
-    tput civis # Hide the cursor
-    while kill -0 "$pid" 2>/dev/null; do
-        i=$(( (i + charwidth) % ${#spin} ))
-        printf "%s" "${spin:i:charwidth}"
-        cursorBack 1
-        sleep 0.1
-    done
-    tput cnorm # Restore the cursor
-    wait "$pid" # Capture the exit code
-    return "$?"
-}
-
 function workflow() {
     start=$(date +"%s")
     sed -i "12s/.*/    Date Modified: $(date +"%d-%m-%Y %H:%M:%S" -r "$0")/" "$0"
