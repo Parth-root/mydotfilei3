@@ -1,5 +1,14 @@
 #!/bin/bash
 # Parth-root
+banner() {
+    msg="  $*  "
+    edge=$(echo "$msg" | sed 's/./-/g')
+    echo -e "\n"
+    echo "+$edge+"
+    echo "|$msg|"
+    echo "+$edge+"
+    echo -e "\n"
+}
 function pbar {
 	echo ""
 	let _progress=(${1}*100/100*100)/100  # Process data
@@ -11,13 +20,13 @@ function pbar {
 tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
 printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
-sleep 0.5
+#sleep 0.5
 tput cup $((`tput lines`-1))
 echo -ne "\033[K"
 tput rc
 echo -ne "\033[1A"
 }
-#test
+banner test
 pbar 1
 pbar 30
 pbar 60

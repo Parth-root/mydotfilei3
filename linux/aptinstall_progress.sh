@@ -7,11 +7,13 @@ cd ..
 curdirgit=$PWD
 cd linux
 banner() {
-    msg="# $* #"
-    edge=$(echo "$msg" | sed 's/./#/g')
-    echo "$edge"
-    echo "$msg"
-    echo "$edge"
+    msg="  $*  "
+    edge=$(echo "$msg" | sed 's/./-/g')
+    #echo -e "\n"
+    echo -e "\n+$edge+"
+    echo    "|$msg|"
+    echo -e "+$edge+\n"
+    #echo -e "\n"
 }
 # progress bar function
 # Parth-root edited
@@ -37,6 +39,7 @@ echo -ne "\033[1A"
 
 pbar 1
 banner "Startship instaling..."
+sleep 1
 pbar 5
 sudo apt install curl -y
 pbar 12
@@ -44,47 +47,28 @@ curl -sS https://starship.rs/install.sh | sh
 sudo apt update -y
 sudo apt upgrade -y
 pbar 22
-sudo apt install neofetch -y
-pbar 28
-sudo apt install expect -y
+sudo apt install neofetch expect -y
 pbar 31
-banner "instaling starship to terminal"
+banner "instaling i3 & kitty & git "
 sleep 1
-sudo apt install i3 -y
-pbar 38
-sudo apt install kitty -y
-pbar 40
-sudo apt install git -y
-pbar 45
+sudo apt install i3 kitty git -y
+pbar 41
 
 #kitty theam 
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
-banner "stow to restore file"
+banner "instaling stow & polybar & rofi & neovim & Nitrogen"
 sleep 1
-sudo apt install stow -y
-pbar 50
-banner "polybar for bar on upper side in i3"
-sleep 1
-sudo apt install polybar -y
-banner "Rofi to start application"
-sleep 1
-sudo apt install rofi -y
+sudo apt install stow polybar rofi neovim nitrogen -y
 pbar 52
 banner "comman softare"
 sleep 1
 sudo apt-get install software-properties-common
 pbar 56
-banner "neovim"
-sudo apt install neovim -y
-pbar 58
 banner "python3 pip"
 sudo apt install python3-pip -y
 pbar 60
 sudo pip3 install i3ipc
 # extra all commented
-banner "Nitrogen for wallpaper piker"
-sleep 1
-sudo apt install nitrogen -y
 banner "temp sensore"
 sleep 1
 #sudo apt install lm-sensors -y
@@ -102,7 +86,6 @@ sleep 1
 cd $curdirgit
 cd linux
 banner "ading line to make things work"
-pbar 61
 pbar 61
 read -p "Do you want to install script line? [y/n] " yn
 
