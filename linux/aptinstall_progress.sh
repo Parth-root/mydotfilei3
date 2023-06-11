@@ -80,6 +80,21 @@ sleep 1
 #echo "Remeber gpick isinstalled for piking color"
 #apt instll gpick
 
+# --------------------- terminal randome color ------------------
+cd 
+ls git_all &> /dev/null
+if [[ $? != 0 ]]; then
+mkdir git_all
+fi
+cd git_all
+git clone https://gitlab.com/dwt1/shell-color-scripts.git
+cd shell-color-scripts
+sudo make install
+sudo ./colorscriptsroot.sh $curdirgit
+cd colorscriptsFIX
+
+# ----------------------------- end -----------------------------
+
 # ---------------------------picom jonaburg -----------------
 banner picom
 read -p "Do you want to install picom? [y/n] " yn
@@ -108,8 +123,6 @@ esac
 pbar 71
 # -------------------------- end picom ----------------------
 # fzf # install from full
-
-#(good file manager)
 
 # ----------------------------------Script to add line in file ----------------
 cd $curdirgit

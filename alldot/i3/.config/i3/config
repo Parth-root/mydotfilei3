@@ -12,6 +12,7 @@ exec xrandr --dpi 120
 exec_always --no-startup-id picom
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id kitty
+exec_always --no-startup-id nitrogen --restore
 exec xinput set-prop "IMG4100:00 4D49:4150 Touchpad" "libinput Tapping Enabled" 1
 set $mod Mod4
 #audio
