@@ -21,10 +21,14 @@ tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
 printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
 #sleep 0.5
-tput cup $((`tput lines`-1))
-echo -ne "\033[K"
-tput rc
-echo -ne "\033[1A"
+if [[ $1 != 100 ]]; then
+	tput cup $((`tput lines`-1))
+	echo -ne "\033[K"
+	tput rc
+	echo -ne "\033[1A"
+else 
+	tput rc
+fi
 }
 banner test
 pbar 1
