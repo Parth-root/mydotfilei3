@@ -39,6 +39,17 @@ cd ..
 cd rofi
 stow --verbose=3 ./ -t ~/
 cd ..
+
+cd picom
+stow -D --verbose=3 ./ -t ~/
+cd ..
+
+./deletbeforestow.sh picom
+
+cd picom
+stow --verbose=3 ./ -t ~/
+cd ..
+
 # deleting file
 ./filedeletforestow.sh .Xresources
 cd home

@@ -9,6 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 exec xrandr --dpi 120
+exec_always --no-startup-id picom
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id kitty
 exec xinput set-prop "IMG4100:00 4D49:4150 Touchpad" "libinput Tapping Enabled" 1
@@ -196,4 +197,4 @@ client.background       #FFFFFF
 # floating pop up automatically
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-#for_window [window_role="pop-up"] floating enable
+for_window [window_role="nm-applet"] floating enable
