@@ -188,7 +188,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #83CAFA #51A2DA #FFFFFF #83CAFA   #51A2DA
+client.focused          #ea6962 #51A2DA #FFFFFF #83CAFA   #51A2DA
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
@@ -199,3 +199,8 @@ client.background       #FFFFFF
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="nm-applet"] floating enable
+for_window [window_role="Nitrogen"] floating enable
+
+
+# auto start
+exec_always --no-startup-id /usr/lib/policykit-1gnome/polkit-gnome-authentication-agent-1 &
