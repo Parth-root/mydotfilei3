@@ -1,7 +1,11 @@
 #!/bin/bash
 cd /opt/shell-color-scripts/colorscripts
 rm -rfv *
+
+echo "--------------------------"
+echo $1
+echo "--------------------------"
 cd $1
-cd colorscriptsFIX
+cd linux/colorscriptsFIX
 cp -rv ./* /opt/shell-color-scripts/colorscripts
 

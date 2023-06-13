@@ -5,6 +5,7 @@
 clear
 cd ..
 curdirgit=$PWD
+#: << 'comment'
 cd linux
 banner() {
     msg="  $*  "
@@ -90,8 +91,12 @@ cd git_all
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 cd shell-color-scripts
 sudo make install
+
+echo $curdirgit
+cd linux 
 sudo ./colorscriptsroot.sh $curdirgit
-cd colorscriptsFIX
+cd 
+
 
 # ----------------------------- end -----------------------------
 
