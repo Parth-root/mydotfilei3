@@ -1,12 +1,12 @@
 #!/bin/bash
 echo -e "\nUpdating all file\nconecting all file\n.....\n...........\n........."
-cd i3
+cd i3_parth
 stow -D --verbose=3 ./ -t ~/
 cd ..
 
 ./deletbeforestow.sh i3
 
-cd i3
+cd i3_parth
 stow --verbose=3 ./ -t ~/
 cd ..
 
@@ -49,3 +49,10 @@ cd ..
 cd picom
 stow --verbose=3 ./ -t ~/
 cd ..
+
+# deleting file
+./filedeletforestow.sh .Xresources
+cd home
+stow --verbose=3 ./ -t ~/
+cd ..
+
