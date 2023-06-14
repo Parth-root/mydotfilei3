@@ -58,7 +58,6 @@ banner "instaling i3 & kitty & git "
 sleep 1
 sudo apt install i3 kitty git -y
 pbar 41
-
 #kitty theam 
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
 banner "instaling stow & polybar & rofi & neovim & Nitrogen & ranger"
