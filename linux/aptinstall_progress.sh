@@ -54,9 +54,10 @@ sudo apt upgrade -y
 pbar 22
 sudo apt install neofetch expect -y
 ipbar 31
-banner "instaling i3 & kitty & git "
+banner "instaling i3 & kitty & git & screenshot"
 sleep 1
-sudo apt install i3 kitty git -y
+sudo apt install i3 kitty git maim xclip xdotool -y
+
 pbar 41
 #kitty theam 
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
@@ -81,7 +82,9 @@ sleep 1
 #apt instll gpick
 
 # --------------------- terminal randome color ------------------
-cd 
+cd $HOME
+mkdir -p .local/bin
+cd $HOME
 ls git_all &> /dev/null
 if [[ $? != 0 ]]; then
 mkdir git_all
@@ -92,14 +95,21 @@ git clone https://gitlab.com/dwt1/shell-color-scripts.git
 cd shell-color-scripts
 sudo make install
 
-echo $curdirgit
 cd $curdirgit
 cd linux 
 sudo ./colorscriptsroot.sh $curdirgit
-cd 
+cd ..
+cp -v 1.jpg 2.jpg 3.jpg ~/Documents
 
 
 # ----------------------------- end -----------------------------
+
+# --------------------- add bin custum script -------------------
+banner "custum script added"
+cd $curdirgit
+cd linux
+sudo ./scripttobin $curdirgit
+# ------------------------------ end ----------------------------
 
 # ---------------------------picom jonaburg -----------------
 banner picom
