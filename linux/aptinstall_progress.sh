@@ -5,7 +5,6 @@
 clear
 cd ..
 curdirgit=$PWD
-#: << 'comment'
 cd linux
 banner() {
     msg="  $*  "
@@ -18,19 +17,31 @@ banner() {
 }
 # progress bar function
 # Parth-root edited
+startpoint=0
 function pbar {
-	echo ""
-	let _progress=(${1}*100/100*100)/100  # Process data
-	let _done=(${_progress}*4)/10
-	let _left=40-$_done
+if [[ $2 == 1 ]]
+then
+for (( i=$startpoint ; i<$1 ; i++ ));
+do
+        pbar i 2
+done
+fi
+        let _progress=(${1}*100/100*100)/100  # Process data
+        let _done=(${_progress}*10)/10
+        let _left=100-$_done
 # Build progressbar string lengths
-	_done=$(printf "%${_done}s")
-	_left=$(printf "%${_left}s")
+        _done=$(printf "%${_done}s")
+        _left=$(printf "%${_left}s")
 tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
-printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
-sleep 1.5
-if [[ $1 != 100 ]]; then
+printf "\rProgress : [${_done// /:}${_left// /-}] ${_progress}%%"
+if [[ $2 == 2 ]]
+then
+        sleep 0.1
+else
+sleep 1
+fi
+if [[ $1 != 100 &&  $2 != 2 ]]; then
         tput cup $((`tput lines`-1))
         echo -ne "\033[K"
         tput rc
@@ -38,40 +49,39 @@ if [[ $1 != 100 ]]; then
 else    
         tput rc 
 fi      
+startpoint=$1
 }
-
 #starting instaling
 
-pbar 1
+pbar 1 1
 banner "Startship instaling..."
-sleep 1
-pbar 5
-sudo apt install curl -y
-pbar 12
+sleep 1 1
+sudo apt install curl -y &>/dev/null
+pbar 12 1
 curl -sS https://starship.rs/install.sh | sh
 sudo apt update -y
 sudo apt upgrade -y
-pbar 22
+pbar 22 1
 sudo apt install neofetch expect -y
-ipbar 31
+pbar 31 1
 banner "instaling i3 & kitty & git & screenshot"
 sleep 1
 sudo apt install i3 kitty git maim xclip xdotool -y
 
-pbar 41
+pbar 41 1
 #kitty theam 
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
 banner "instaling stow & polybar & rofi & neovim & Nitrogen & ranger"
 sleep 1
 sudo apt install stow polybar rofi neovim nitrogen ranger -y
-pbar 52
+pbar 52 1
 banner "comman softare"
 sleep 1
 sudo apt-get install software-properties-common cmake -y
-pbar 56
+pbar 56 1
 banner "python3 pip"
 sudo apt install python3-pip -y
-pbar 60
+pbar 60 1
 sudo pip3 install i3ipc
 # extra all commented
 banner "temp sensore"
@@ -136,7 +146,7 @@ case $yn in
                 ;;
         * ) banner "skiping picom dont add blur adn effect";;
 esac
-pbar 71
+pbar 71 1
 # -------------------------- end picom ----------------------
 # fzf # install from full
 
@@ -144,7 +154,7 @@ pbar 71
 cd $curdirgit
 cd linux
 banner "ading line to make things work"
-pbar 61
+pbar 81 1
 read -p "Do you want to install script line? [y/n] " yn
 
 case $yn in 
@@ -155,13 +165,13 @@ case $yn in
 		./allline.sh;;
 	* ) banner "skiped";;
 esac
-pbar 94
+pbar 91 1
 # -------------------------------script for stow ---------------------------
 cd $curdirgit
 cd alldot
 banner "runing Stow script"
 sleep 2
-pbar 71
+pbar 95 1
 banner "Stow will set file to its location"                        
 read -p "Continue? [y/n] " yn 
 
@@ -173,5 +183,5 @@ case $yn in
 		./masterstow.sh;;
         * ) banner "skiped";;  
 esac
-pbar 100
+pbar 100 1
 banner "--------------------> END <-------------------- "

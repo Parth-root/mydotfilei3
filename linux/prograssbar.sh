@@ -22,19 +22,19 @@ do
 done
 fi
 	let _progress=(${1}*100/100*100)/100  # Process data
-        let _done=(${_progress}*4)/10
-        let _left=40-$_done
+        let _done=(${_progress}*10)/10
+        let _left=100-$_done
 # Build progressbar string lengths
         _done=$(printf "%${_done}s")
         _left=$(printf "%${_left}s")
 tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
-printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
+printf "\rProgress : [${_done// /=}${_left// /_}] ${_progress}%%"
 if [[ $2 == 2 ]]
 then
 	sleep 0.01
 else
-sleep 1.5
+sleep 0.1
 fi
 if [[ $1 != 100 &&  $2 != 2 ]]; then
         tput cup $((`tput lines`-1))
@@ -51,15 +51,15 @@ startpoint=$1
 
 banner test
 pbar 5 1
-tree
+#tree
 pbar 30 1
 sleep 1
-tree
+#tree
 pbar 60 1
-tree
+sleep 1
 pbar 100 1
-tree
-echo "Exit"
+sleep 1
+banner "Exit"
 #below is usefull curser commadn to look forwerd
 : << 'comment'
 - Position the Cursor:
