@@ -9,32 +9,56 @@ banner() {
     echo "+$edge+"
     echo -e "\n"
 }
+
+# progress bar function
+# Parth-root edited
+startpoint=0
 function pbar {
-	echo ""
+if [[ $2 == 1 ]]
+then
+for (( i=$startpoint ; i<$1 ; i++ ));
+do
+        pbar i 2
+done
+fi
 	let _progress=(${1}*100/100*100)/100  # Process data
-	let _done=(${_progress}*4)/10
-	let _left=40-$_done
+        let _done=(${_progress}*4)/10
+        let _left=40-$_done
 # Build progressbar string lengths
-	_done=$(printf "%${_done}s")
-	_left=$(printf "%${_left}s")
+        _done=$(printf "%${_done}s")
+        _left=$(printf "%${_left}s")
 tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
 printf "\rProgress : [${_done// /#}${_left// /-}] ${_progress}%%"
-#sleep 0.5
-if [[ $1 != 100 ]]; then
-	tput cup $((`tput lines`-1))
-	echo -ne "\033[K"
-	tput rc
-	echo -ne "\033[1A"
-else 
-	tput rc
+if [[ $2 == 2 ]]
+then
+	sleep 0.01
+else
+sleep 1.5
 fi
+if [[ $1 != 100 &&  $2 != 2 ]]; then
+        tput cup $((`tput lines`-1))
+        echo -ne "\033[K"
+        tput rc
+        echo -ne "\033[1A"
+else    
+        tput rc 
+fi      
+startpoint=$1
 }
+
+
+
 banner test
-pbar 1
-pbar 30
-pbar 60
-pbar 100
+pbar 5 1
+tree
+pbar 30 1
+sleep 1
+tree
+pbar 60 1
+tree
+pbar 100 1
+tree
 echo "Exit"
 #below is usefull curser commadn to look forwerd
 : << 'comment'
