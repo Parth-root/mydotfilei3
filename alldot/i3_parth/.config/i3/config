@@ -46,6 +46,10 @@ exec --no-startup-id nm-applet
 # brightness for leptop
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+# for more batter control
+bindsym $mod+F3 exec --no-startup-id brightnessctl set +1%
+bindsym $mod+F2 exec --no-startup-id brightnessctl set 1%-
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
