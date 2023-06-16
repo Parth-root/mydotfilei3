@@ -109,7 +109,8 @@ cd $curdirgit
 cd linux 
 sudo ./colorscriptsroot.sh $curdirgit
 cd ..
-cp -v 1.jpg 2.jpg 3.jpg ~/Documents
+cd wallpaper
+cp -v ./* ~/Documents
 
 
 # ----------------------------- end -----------------------------
