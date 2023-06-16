@@ -63,3 +63,4 @@ echo time elapsed "$duration" minutes
 workflow "$1" &
 splash_screen "$!"
 echo "exiting"
+echo "ok"
