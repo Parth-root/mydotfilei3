@@ -1,11 +1,18 @@
 #! /bin/bash
+# root user chaking if root exit (root user cause $ home to / and using rm at certain location cause unbootabel system)
+if [ "$(id -u)" == "0" ]; then
+   echo "Running as root will cause issue EXITING !!!!!"
+   exit 1
+fi
 #recomended package to install on new linux machine
 #upgrade is going to be taking lonf as par your pc update status
 #first is banner function to  display massage
 clear
 cd ..
-curdirgit=$PWD
+curdirgit=$PWD  # save currunt dir for script to use
 cd linux
+#: << 'comment' # uncomment to use comment for test (for advanced user only)
+# banner to print custum massage
 banner() {
     msg="  $*  "
     edge=$(echo "$msg" | sed 's/./-/g')
@@ -15,48 +22,51 @@ banner() {
     echo -e "+$edge+\n"
     #echo -e "\n"
 }
+
 # progress bar function
 # Parth-root edited
 startpoint=0
 function pbar {
-if [[ $2 == 1 ]]
+if [[ $2 == 1 ]] # for smooth progress bar send 1 as arg after sending percentage
 then
-for (( i=$startpoint ; i<$1 ; i++ ));
+for (( i=$startpoint ; i<$1 ; i++ )); 
 do
-        pbar i 2
+        pbar i 2 # 2 as arg for speed in smooth progress bar
 done
 fi
         let _progress=(${1}*100/100*100)/100  # Process data
-        let _done=(${_progress}*10)/10
-        let _left=100-$_done
+        let _done=(${_progress}*10)/10 # add length
+        let _left=100-$_done # progressed bar
 # Build progressbar string lengths
         _done=$(printf "%${_done}s")
         _left=$(printf "%${_left}s")
-tput sc #save the current cursor position
-tput cup $((`tput lines`-1))
-printf "\rProgress : [${_done// /:}${_left// /-}] ${_progress}%%"
+tput sc # save the current cursor position
+tput cup $((`tput lines`-1)) # last line in display
+printf "\rProgress : [${_done// /}${_left// /}] ${_progress}%%"
 if [[ $2 == 2 ]]
 then
-        sleep 0.1
+        sleep 0.02
 else
-sleep 1
+sleep 1.5
 fi
 if [[ $1 != 100 &&  $2 != 2 ]]; then
         tput cup $((`tput lines`-1))
-        echo -ne "\033[K"
+        echo -ne "\033[K" # curser at first in line
         tput rc
-        echo -ne "\033[1A"
+        echo -ne "\033[1A" # remove line to dont display at end when line is come to bottom
 else    
-        tput rc 
+        tput rc # reset curser to saved position
 fi      
-startpoint=$1
+startpoint=$1 # save postion to use in smooth progress bar
 }
+#: << 'comment'  #uncomment to use comment for test (for advanced user only)
+
 #starting instaling
 
 pbar 1 1
 banner "Startship instaling..."
-sleep 1 1
-sudo apt install curl -y &>/dev/null
+sleep 1
+sudo apt install curl -y &>/dev/null # curl
 pbar 12 1
 curl -sS https://starship.rs/install.sh | sh
 sudo apt update -y
@@ -66,14 +76,14 @@ sudo apt install neofetch expect -y
 pbar 31 1
 banner "instaling i3 & kitty & git & screenshot"
 sleep 1
-sudo apt install i3 kitty git maim xclip xdotool -y
-
+sudo apt install i3 kitty git maim xclip xdotool -y  # maim xclip and xdotool for screenshot
+# fzf # install from full
 pbar 41 1
 #kitty theam 
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
 banner "instaling stow & polybar & rofi & neovim & Nitrogen & ranger"
 sleep 1
-sudo apt install stow polybar rofi neovim nitrogen ranger -y
+sudo apt install stow polybar rofi neovim nitrogen ranger -y # ranger file manager
 pbar 52 1
 banner "comman softare"
 sleep 1
@@ -86,8 +96,8 @@ sudo pip3 install i3ipc
 # extra all commented
 banner "temp sensore"
 sleep 1
-#sudo apt install lm-sensors -y
-
+sudo apt install lm-sensors -y
+banner " Run with sudo ---> sensors-detect is no temp shown to polybar"
 #echo "Remeber gpick isinstalled for piking color"
 #apt instll gpick
 
@@ -100,6 +110,8 @@ if [[ $? != 0 ]]; then
 mkdir git_all
 fi
 cd git_all
+banner "removing file if aleady thare"
+sleep 1
 rm -rfv ./*
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 cd shell-color-scripts
@@ -111,12 +123,32 @@ sudo ./colorscriptsroot.sh $curdirgit
 cd ..
 cd wallpaper
 cp -v ./* ~/Documents
+cd $curdirgit
+cd linux 
+cd fonts
+mkdir ~/.fonts
+cp -v ./* ~/.fonts
+cd ~/.fonts
+fc-cache -fv | grep "succeeded$"
+if [[ $? != 0 ]]
+then
+banner "Fonts cache DONE"
+sleep 1
+fi
+read -p "Is this leptop (ading user to fix Brightness not working)" yn
 
-
-# ----------------------------- end -----------------------------
+case $yn in 
+        y ) 
+                banner "Adding user in group"
+		sudo apt install brightnessctl
+                sudo usermod -aG video ${USER}
+		;;
+        * ) banner "skiped";;
+esac
+#----------------------------- end -----------------------------
 
 # --------------------- add bin custum script -------------------
-banner "custum script added"
+banner "custum script to add for direct running"
 cd $curdirgit
 cd linux
 sudo ./scripttobin $curdirgit
@@ -149,12 +181,11 @@ case $yn in
 esac
 pbar 71 1
 # -------------------------- end picom ----------------------
-# fzf # install from full
 
 # ----------------------------------Script to add line in file ----------------
 cd $curdirgit
 cd linux
-banner "ading line to make things work"
+banner "Add line in bashrc and other location"
 pbar 81 1
 read -p "Do you want to install script line? [y/n] " yn
 
@@ -186,3 +217,6 @@ case $yn in
 esac
 pbar 100 1
 banner "--------------------> END <-------------------- "
+# running pbar for fun 
+#pbar 1
+#pbar 100 1

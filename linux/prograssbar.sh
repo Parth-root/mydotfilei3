@@ -1,4 +1,8 @@
 #!/bin/bash
+if [ "$(id -u)" == "0" ]; then
+   echo "Running as root will cause issue EXITING !!!!!"
+   exit 1
+fi
 # Parth-root
 banner() {
     msg="  $*  "
@@ -29,12 +33,12 @@ fi
         _left=$(printf "%${_left}s")
 tput sc #save the current cursor position
 tput cup $((`tput lines`-1))
-printf "\rProgress : [${_done// /=}${_left// /_}] ${_progress}%%"
+printf "\rProgress : [${_done// /}${_left// /_}] ${_progress}%%"
 if [[ $2 == 2 ]]
 then
-	sleep 0.01
+	sleep 0.02
 else
-sleep 0.1
+sleep 1.5
 fi
 if [[ $1 != 100 &&  $2 != 2 ]]; then
         tput cup $((`tput lines`-1))
