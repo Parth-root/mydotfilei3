@@ -17,9 +17,9 @@
 ;==========================================================
 
 [colors]
-background = #cc11111b
-background-alt = #373B41
-foreground = #cdd6f4
+background = #000000
+background-alt = #000000
+foreground = #ffffff
 primary = #F0C674
 secondary = #8ABEB7
 alert = #A54242
@@ -28,7 +28,7 @@ transparent = #FF00000
 
 [bar/main]
 width = 100%
-height = 24pt
+height = 28pt
 radius = 0 
 dpi = 120
 
@@ -48,7 +48,20 @@ module-margin = 1
 separator = "|"
 separator-foreground = ${colors.disabled}
 
-font-0 = monospace;2
+#font-0 = monospace;2
+#font-0 = 3270NerdFontMono-Regular,16
+font-0 = 3270NerdFont-Condensed,16
+#font-0 = 3270NerdFontMono-SemiCondensed,16
+#font-0 = 3270NerdFontPropo-SemiCondensed,16
+#font-0 = 3270NerdFontMono-Condensed,16
+#font-0 = 3270NerdFontPropo-Condensed,16
+#font-0 = 3270NerdFont-Regular,16
+#font-0 = 3270NerdFontMono-Regular,16
+#font-0 = 3270NerdFontPropo-Regular,16
+#font-0 = 3270NerdFont-SemiCondensed,16
+
+
+
 
 modules-left = xworkspaces xwindow
 modules-right= filesystem pulseaudio xkeyboard memory cpu bluetooth wlan battery date powermanu
@@ -68,21 +81,6 @@ enable-ipc = true
 ; wm-restack = i3
 
 ; override-redirect = true
-
-[module/powermanu]
-label = "Power"
-type = custom/script
-exec = rofi-bluetooth --status
-interval = 600
-click-left = rofi -show power-menu -modi power-menu:rofi-power-menu
-
-[module/bluetooth]
-label="Blutooth"
-type = custom/script
-exec = rofi-bluetooth --status
-interval = 120
-click-left = rofi-bluetooth &
-
 
 [module/xworkspaces]
 type = internal/xworkspaces
@@ -112,7 +110,7 @@ type = internal/fs
 interval = 360
 mount-0 = /
 
-label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
+label-mounted =  %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
 
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.disabled}
@@ -120,7 +118,7 @@ label-unmounted-foreground = ${colors.disabled}
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume-prefix = "VOL "
+format-volume-prefix = "VOL  "
 format-volume-prefix-foreground = ${colors.primary}
 format-volume = <label-volume>
 
@@ -144,16 +142,23 @@ label-indicator-background = ${colors.secondary}
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "RAM "
+format-prefix = "  "
 format-prefix-foreground = ${colors.primary}
 label = %percentage_used:2%%
 
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "CPU "
+format-prefix = " "
 format-prefix-foreground = ${colors.primary}
 label = %percentage:2%%
+
+[module/bluetooth]
+label=""
+type = custom/script
+exec = rofi-bluetooth --status
+interval = 120
+click-left = rofi-bluetooth &
 
 [network-base]
 type = internal/network
@@ -165,12 +170,12 @@ label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
 [module/wlan]
 inherit = network-base
 interface-type = wireless
-label-connected = %essid%
+label-connected =   %essid%
 ;label-connected = %{A1:~/.config/polybar/rofi-wifi-menu.sh ~/.config/polybar/:}%essid%%{A}
 
 [module/battery]
 type = internal/battery
-
+label = "b"
 ; This is useful in case the battery never reports 100% charge
 ; Default: 100
 full-at = 100
@@ -208,6 +213,14 @@ date-alt = %Y-%m-%d %H:%M:%S
 
 label = %date%
 label-foreground = ${colors.primary}
+
+[module/powermanu]
+label = ""
+type = custom/script
+exec = rofi-bluetooth --status
+interval = 600
+click-left = rofi -show power-menu -modi power-menu:rofi-power-menu
+
 
 [settings]
 screenchange-reload = true
