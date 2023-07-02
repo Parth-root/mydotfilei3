@@ -1,0 +1,14 @@
+#!/bin/bash
+#: << 'comment'
+cd fonts
+mkdir ~/.fonts
+cp -v ./* ~/.fonts
+cd ~/.fonts
+fc-cache -fv | grep "succeeded$"
+if [[ $? == 0 ]]
+then
+echo 'Font Done'
+sleep 1
+kill -9 $PPID
+fi
+

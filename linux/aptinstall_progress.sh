@@ -124,17 +124,6 @@ cd ..
 cd wallpaper
 cp -v ./* ~/Documents
 cd $curdirgit
-cd linux 
-cd fonts
-mkdir ~/.fonts
-cp -v ./* ~/.fonts
-cd ~/.fonts
-fc-cache -fv | grep "succeeded$"
-if [[ $? != 0 ]]
-then
-banner "Fonts cache DONE"
-sleep 1
-fi
 read -p "Is this leptop (ading user to fix Brightness not working)" yn
 
 case $yn in 
