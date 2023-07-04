@@ -1,4 +1,4 @@
-![what is this ](./wallpaper/1.jpg)
+![what is this ](/wallpaper/1.jpg)
 ![alt text](https://github.com/Parth-root/mydotfilei3/tree/main/wallpaper/2.jpg)
 ![alt text](https://github.com/Parth-root/mydotfilei3/tree/main/wallpaper/3.jpg)
 
