@@ -1,3 +1,4 @@
+<img src="./screenshot/screenshot1.png" alt="lasagna">
 ![what is this ](/screenshot/screenshot1.png)
 ![alt text](https://github.com/Parth-root/mydotfilei3/blob/55b6c8d4eae931a4acac60e732fa223d4f42d52c/screenshot/screenshot2.png)
 ![alt text](https://github.com/Parth-root/mydotfilei3/blob/main/screenshot/screenshot2.png)
